@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/sping-boot-api/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-admin/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-core/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-common/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-param-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-result-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-table-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-generator/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-admin-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-api-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-common-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-admin-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-api-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-common-dao/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/spring-boot-entity/spring-boot-param-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-entity/spring-boot-result-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-entity/spring-boot-table-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-service/spring-boot-admin-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-service/spring-boot-api-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-service/spring-boot-common-service/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-boot-generator" />
+        <module name="spring-boot-core" />
+        <module name="spring-boot-service" />
+        <module name="spring-boot-api" />
+        <module name="spring-boot-admin" />
+        <module name="spring-boot-common" />
+        <module name="learn-spring-boot-demo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-boot-admin-dao" target="1.8" />
+      <module name="spring-boot-admin-service" target="1.5" />
+      <module name="spring-boot-api-dao" target="1.8" />
+      <module name="spring-boot-api-service" target="1.5" />
+      <module name="spring-boot-common-dao" target="1.8" />
+      <module name="spring-boot-common-service" target="1.5" />
+      <module name="spring-boot-dao" target="1.8" />
+      <module name="spring-boot-entity" target="1.8" />
+      <module name="spring-boot-param-entity" target="1.8" />
+      <module name="spring-boot-result-entity" target="1.8" />
+      <module name="spring-boot-table-entity" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="learn-spring-boot-demo" options="-parameters" />
+      <module name="spring-boot-admin" options="-parameters" />
+      <module name="spring-boot-admin-dao" options="-parameters" />
+      <module name="spring-boot-admin-service" options="" />
+      <module name="spring-boot-api" options="-parameters" />
+      <module name="spring-boot-api-dao" options="-parameters" />
+      <module name="spring-boot-api-service" options="" />
+      <module name="spring-boot-common" options="-parameters" />
+      <module name="spring-boot-common-dao" options="-parameters" />
+      <module name="spring-boot-common-service" options="" />
+      <module name="spring-boot-core" options="-parameters" />
+      <module name="spring-boot-dao" options="-parameters" />
+      <module name="spring-boot-entity" options="-parameters" />
+      <module name="spring-boot-generator" options="-parameters" />
+      <module name="spring-boot-param-entity" options="-parameters" />
+      <module name="spring-boot-result-entity" options="" />
+      <module name="spring-boot-service" options="-parameters" />
+      <module name="spring-boot-table-entity" options="-parameters" />
+    </option>
+  </component>
+</project>
