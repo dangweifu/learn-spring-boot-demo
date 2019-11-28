@@ -1,4 +1,4 @@
-package com.xiaohei.core.matcher;
+package com.xiaohei.matcher;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

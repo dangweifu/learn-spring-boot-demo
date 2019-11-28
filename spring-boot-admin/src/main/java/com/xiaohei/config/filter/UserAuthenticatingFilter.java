@@ -1,0 +1,77 @@
+package com.xiaohei.config.filter;
+
+import com.alibaba.fastjson.JSON;
+import com.xiaohei.matcher.AcceptTicket;
+import com.xiaohei.utils.HttpContextUtils;
+import com.xiaohei.utils.R;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author : WiuLuS
+ * @version : v1.11.28.2019
+ * @discription :
+ * @date : 2019-11-28 16:30:37
+ * @email : m13886933623@163.com
+ */
+@Configuration
+public class UserAuthenticatingFilter extends AuthenticatingFilter {
+    @Override
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
+        //获取请求token
+        String token = getRequestToken((HttpServletRequest) request);
+
+        if(StringUtils.isBlank(token)){
+            return null;
+        }
+
+        return new AcceptTicket(token);
+    }
+
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        return false;
+    }
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setContentType("application/json;charset=utf-8");
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
+        try {
+            //处理登录失败的异常
+            Throwable throwable = e.getCause() == null ? e : e.getCause();
+            R r = R.error(401, throwable.getMessage());
+            httpResponse.getWriter().print(JSON.toJSONString(r));
+        } catch (IOException e1) {
+
+        }
+
+        return false;
+    }
+    /**
+     * 获取请求的token
+     */
+    private String getRequestToken(HttpServletRequest httpRequest){
+        //从header中获取token
+        String token = httpRequest.getHeader("token");
+
+        //如果header中不存在token，则从参数中获取token
+        if(StringUtils.isBlank(token)){
+            token = httpRequest.getParameter("token");
+        }
+
+        return token;
+    }
+
+}
