@@ -5,6 +5,7 @@ import com.xiaohei.entity.param.UserModelEntity;
 import com.xiaohei.entity.table.UserEntity;
 import com.xiaohei.service.api.ApiServiceDemo;
 import com.xiaohei.utils.R;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 public class ModelController {
 
     @GetMapping("/test")
+    @RequiresPermissions(value = {"test:admin:user"})
     public String test(){
         return "Hello World!" ;
     }

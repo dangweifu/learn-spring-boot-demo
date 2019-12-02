@@ -10,6 +10,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -37,10 +38,26 @@ public class UserAuthenticatingFilter extends AuthenticatingFilter {
 
         return new AcceptTicket(token);
     }
+    @Override
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        if(((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name())){
+            return true;
+        }
+        return false;
+    }
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        return false;
+        //获取请求token，如果token不存在，直接返回401
+        String token = getRequestToken((HttpServletRequest) request);
+        if(StringUtils.isBlank(token)){
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+            httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
+            httpResponse.getWriter().print(JSON.toJSONString(R.error(401,"invalid token")));
+            return false;
+        }
+        return executeLogin(request, response);
     }
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
@@ -71,7 +88,7 @@ public class UserAuthenticatingFilter extends AuthenticatingFilter {
             token = httpRequest.getParameter("token");
         }
 
-        return token;
+        return "token";
     }
 
 }

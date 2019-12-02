@@ -22,11 +22,11 @@ public class AcceptTicket implements AuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return token;
     }
 
     @Override
     public Object getCredentials() {
-        return null;
+        return token;
     }
 }
