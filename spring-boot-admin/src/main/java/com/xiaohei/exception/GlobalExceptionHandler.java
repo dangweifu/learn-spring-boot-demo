@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author : WiuLuS
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @date : 2019-11-29 18:59:26
  * @email : m13886933623@163.com
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
