@@ -1,16 +1,21 @@
 package com.xiaohei.matcher;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.xiaohei.entity.table.UserEntity;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.xiaohei.entity.table.UserTokenEntity;
+import com.xiaohei.service.admin.UserService;
+import com.xiaohei.service.admin.UserTokenService;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author : WiuLuS
@@ -21,7 +26,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class AuthReam  extends AuthorizingRealm {
-
+    @Resource
+    private UserTokenService tokenService ;
+    @Resource
+    private UserService userService ;
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof AcceptTicket;
@@ -30,20 +38,31 @@ public class AuthReam  extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         /*
-         * 根据凭证获取用户权限列表(可以是基于字符串形式返回也可以是基于对象形式返回)
+         * 根据用户主体(用户实体)获取用户权限列表(可以是基于字符串形式返回也可以是基于对象形式返回)
          */
-        return new SimpleAuthorizationInfo();
-//        throw new UnauthorizedException("Subject does not have permission [test:admin:user]");
+        String permission = "all";
+        Set<String> permissions = new HashSet<>();
+        permissions.add(permission);
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.setStringPermissions(permissions);
+        return info;
     }
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         /*
          * 1、从AuthenticationToken中获取token(令牌)
          * 2、根据token从缓存中获取用户登录信息，缓存中拿不到则去数据库中拿 提问：为什么要缓存用户登录信息
          * 3、检查用户登录信息是否有效
          * 4、如果用户登录信息有效，则返回包含用户登录信息的对象，否则抛出账号验证失败异常
          */
-        return new SimpleAuthenticationInfo(new UserEntity(), token.getPrincipal(), getName());
+        Object s = authenticationToken.getPrincipal();
+        UserTokenEntity token = tokenService.selectOne(new EntityWrapper<UserTokenEntity>().eq("TOKEN", s.toString()));
+        //token失效
+        if(token == null || token.getExpireTime().getTime() < System.currentTimeMillis()){
+            throw new IncorrectCredentialsException("token失效，请重新登录");
+        }
+        UserEntity user = userService.selectOne(new EntityWrapper<UserEntity>().eq("ID", token.getId()));
+        return new SimpleAuthenticationInfo(user, s, getName());
     }
 }
