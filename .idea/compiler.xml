@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="learn-spring-boot-demo" />
-        <module name="sping-boot-api" />
         <module name="spring-boot-admin" />
         <module name="spring-boot-api" />
         <module name="spring-boot-common" />
@@ -33,7 +32,6 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="learn-spring-boot-demo" options="-parameters" />
-      <module name="sping-boot-api" options="-parameters" />
       <module name="spring-boot-admin" options="-parameters" />
       <module name="spring-boot-admin-dao" options="-parameters" />
       <module name="spring-boot-admin-service" options="" />
