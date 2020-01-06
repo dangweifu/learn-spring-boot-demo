@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="learn-spring-boot-demo" />
-        <module name="spring-boot-admin" />
-        <module name="spring-boot-api" />
-        <module name="spring-boot-common" />
-        <module name="spring-boot-core" />
         <module name="spring-boot-generator" />
+        <module name="spring-boot-core" />
         <module name="spring-boot-service" />
+        <module name="spring-boot-api" />
+        <module name="spring-boot-admin" />
+        <module name="spring-boot-common" />
+        <module name="learn-spring-boot-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

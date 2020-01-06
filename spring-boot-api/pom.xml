@@ -8,7 +8,7 @@
         <artifactId>learn-spring-boot-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>sping-boot-api</artifactId>
+    <artifactId>spring-boot-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 </project>
