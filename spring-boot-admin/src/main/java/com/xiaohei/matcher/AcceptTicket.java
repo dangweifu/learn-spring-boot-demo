@@ -1,16 +1,7 @@
 package com.xiaohei.matcher;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
-import com.xiaohei.entity.LoginForm;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.tomcat.util.security.MD5Encoder;
-import org.springframework.beans.BeanUtils;
-import sun.security.provider.MD5;
 
-import java.util.Date;
-import java.util.UUID;
+import org.apache.shiro.authc.AuthenticationToken;
 
 /**
  * @author : WiuLuS

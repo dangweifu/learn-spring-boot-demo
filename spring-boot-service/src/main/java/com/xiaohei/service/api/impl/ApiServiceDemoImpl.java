@@ -1,7 +1,6 @@
 package com.xiaohei.service.api.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xiaohei.dao.api.ApiDemoDao;
 import com.xiaohei.entity.param.SelectUserConditionEntity;
@@ -9,15 +8,9 @@ import com.xiaohei.entity.param.UserModelEntity;
 import com.xiaohei.entity.table.UserEntity;
 import com.xiaohei.service.api.ApiServiceDemo;
 import com.xiaohei.utils.R;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

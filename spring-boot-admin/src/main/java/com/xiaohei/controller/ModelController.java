@@ -12,19 +12,16 @@ import com.xiaohei.matcher.AcceptTicket;
 import com.xiaohei.service.admin.UserService;
 import com.xiaohei.service.admin.UserTokenService;
 import com.xiaohei.service.api.ApiServiceDemo;
-import com.xiaohei.utils.HttpContextUtils;
 import com.xiaohei.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 /**
