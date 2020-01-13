@@ -41,11 +41,7 @@
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!-- 实体getter setter插件配置 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+
         <!-- api-swagger 接口文档配置 -->
         <dependency>
             <groupId>io.springfox</groupId>

@@ -2,6 +2,7 @@ package com.xiaohei.entity.table;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,5 +17,6 @@ import java.io.Serializable;
 @Data
 public class BaseTableEntity implements Serializable {
     @TableId
+    @ApiModelProperty("ID")
     private String id ;
 }

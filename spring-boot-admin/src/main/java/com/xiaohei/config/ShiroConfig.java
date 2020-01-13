@@ -45,6 +45,7 @@ public class ShiroConfig {
         //这里配置不需要登录认证的请求地址
         filterMap.put("/mode/test", "oauth2");
         filterMap.put("/mode/**", "anon");
+        filterMap.put("/business/**", "anon");
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-ui.html", "anon");
         filterMap.put("/swagger/**", "anon");

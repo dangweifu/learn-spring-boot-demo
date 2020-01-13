@@ -19,5 +19,10 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/lib/sms.jar</systemPath>
         </dependency>
+        <!-- 实体getter setter插件配置 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 </project>
