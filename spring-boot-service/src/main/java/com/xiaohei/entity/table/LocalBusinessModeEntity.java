@@ -1,5 +1,6 @@
 package com.xiaohei.entity.table;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.Date;
  * @email : m13886933623@163.com
  */
 @Data
+@TableName("LOCAL_BUSINESS_MODE")
 public class LocalBusinessModeEntity extends BaseTableEntity implements Serializable {
 
     @ApiModelProperty(value = "业务名称")

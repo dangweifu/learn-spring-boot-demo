@@ -40,28 +40,26 @@ public class BusinessModeController {
     @ApiOperation(value = "根据业务ID查询业务详情(这里是接口标签(tab)描述)",notes = "这里是接口详情描述")
     public R queryBusinessBy (
             @ApiParam("业务ID") @PathVariable String businessId){
-        LocalBusinessModeEntity business = modeService.selectById(businessId);
-        return R.ok(business) ;
+        // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
+        return modeService.queryBusinessModeBy(businessId);
     }
     /** 后台登录用户且拥有修改权限(增、删、改)
      *  shiro 权限控制：只有拥有后边权限标识的用户才能访问此接口 @RequiresPermissions(value = {"admin:user:update"})
      **/
     @PostMapping("/update")
     @ApiOperation(value = "根据业务ID进行业务详情的修改(这里是接口标签(tab)描述)",notes = "这里是接口详情描述")
-    public R updateBusinessBy (BusinessModeDto dto){
-        boolean b = modeService.updateAllColumnById(dto);
-        if (b) return R.ok();
-        return R.error();
+    public R updateBusinessBy (@RequestBody BusinessModeDto dto){
+        // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
+        return modeService.updateBusinessModeBy(dto);
     }
     /** 后台登录用户且拥有修改权限(增、删、改)
      * shiro 权限控制：只有拥有后边权限标识的用户才能访问此接口 @RequiresPermissions(value = {"admin:user:update"})
      **/
     @PostMapping("/add")
     @ApiOperation(value = "添加业务(这里是接口标签(tab)描述)",notes = "这里是接口详情描述")
-    public R addBusinessBy (BusinessModeDto dto){
-        boolean b = modeService.insert(dto);
-        if (b) return R.ok();
-        return R.error();
+    public R addBusinessBy (@RequestBody BusinessModeDto dto){
+        // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
+        return modeService.addBusinessMode(dto);
     }
     /** 后台登录用户且拥有修改权限(增、删、改)
      * shiro 权限控制：只有拥有后边权限标识的用户才能访问此接口 @RequiresPermissions(value = {"admin:user:update"})
@@ -69,7 +67,8 @@ public class BusinessModeController {
     @PostMapping("/del/{id}")
     @ApiOperation(value = "删除业务(这里是接口标签(tab)描述)",notes = "这里是接口详情描述")
     public R addBusinessBy (@PathVariable String id){
-        return R.ok(modeService.deleteById(id));
+        // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
+        return modeService.deleteById(id);
     }
 
 }
