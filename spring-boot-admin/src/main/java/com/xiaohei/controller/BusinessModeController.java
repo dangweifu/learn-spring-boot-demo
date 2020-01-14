@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 /**
  * @author : WiuLuS
  * @version : v1.01.13.2020
- * @discription :
+ * @discription : 业务接口控制器模板 ， 方法内部仅做三件事： 收参 、 调用service 、 返回结果（可能是视图，某个页面）
  * @date : 2020-01-13 15:39:16
  * @email : m13886933623@163.com
  */
