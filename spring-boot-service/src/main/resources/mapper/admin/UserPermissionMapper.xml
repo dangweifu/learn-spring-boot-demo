@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaohei.dao.admin.UserPermissionDao">
+    <resultMap id="UserPermissionEntity" type="com.xiaohei.entity.table.UserPermissionEntity">
+        <id column="ID" property="id"/>
+        <result column="PERMISSION_NAME" property="permissionName"/>
+        <result column="PERMISSION_VALUE" property="permissionValue"/>
+        <result column="CREATOR" property="creator"/>
+        <result column="CREATED_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="REMARK" property="remark"/>
+        <result column="IS_DEL" property="isDel"/>
+    </resultMap>
+
+    <select id="getUserPermissionSetBy" parameterType="string" resultType="string">
+        SELECT
+                -- LU.ID ,
+                -- LUP.PERMISSION_NAME ,
+                LUP.PERMISSION_VALUE
+                -- LU.USER_NAME
+        FROM LOCAL_USER_PERMISSION LUP
+        LEFT JOIN LOCAL_ROLE_AND_PERMISSION LURP
+        ON LUP.ID = LURP.PERMISSION_ID
+        LEFT JOIN LOCAL_USER_AND_ROLE LUAR
+        ON LURP.ROLE_ID = LUAR.ROLE_ID
+        LEFT JOIN LOCAL_USER LU
+        ON LUAR.USER_ID = LU.ID
+        WHERE LU.ID = #{userId} ;
+    </select>
+
+</mapper>

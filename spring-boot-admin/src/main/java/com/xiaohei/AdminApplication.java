@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date : 2019-11-19 11:26:29
  * @email : m13886933623@163.com
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.xiaohei")
 @MapperScan(basePackages = {"com.xiaohei.dao"})
 public class AdminApplication {
     public static void main(String[] args) {

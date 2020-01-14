@@ -15,8 +15,11 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
@@ -34,10 +37,9 @@ import java.util.Date;
  * @date : 2019-11-28 16:30:37
  * @email : m13886933623@163.com
  */
-@Configuration
+
 public class UserAuthenticatingFilter extends AuthenticatingFilter {
-    @Resource
-    private UserTokenService tokenService ;
+
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
         //获取请求token
@@ -58,18 +60,7 @@ public class UserAuthenticatingFilter extends AuthenticatingFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         Subject subject = getSubject(request, response);
-        boolean authenticated = subject.isAuthenticated();
-        if (authenticated){
-            Date now = new Date();
-            UserEntity user = (UserEntity)subject.getPrincipal();
-            UserTokenEntity token = new UserTokenEntity();
-            token.setId(user.getId());
-            token.setToken(HttpContextUtils.getHeader(request,"token"));
-            token.setExpireTime(new Date(now.getTime() + GlobalConstant.DEFAULT_USER_TOKEN_EXPIRE_TIME  * 1000));
-            token.setUpdateTime(now);
-            tokenService.updateById(token);
-        }
-        return authenticated;
+        return subject.isAuthenticated();
     }
 
     @Override

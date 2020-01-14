@@ -15,10 +15,14 @@ import java.io.Serializable;
 @Data
 @TableName("LOCAL_USER")
 public class UserEntity extends BaseTableEntity implements Serializable {
-
+    /** 用户名称 */
     private String userName ;
+    /** 登录密码 */
     private String password ;
+    /** 用户邮箱 */
     private String email ;
+    /** 随机盐，用来给密码加密使用 */
     private String salt ;
+    /** 用户年龄 */
     private Integer age ;
 }

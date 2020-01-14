@@ -1,7 +1,14 @@
 package com.xiaohei.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.xiaohei.constant.GlobalConstant;
+import com.xiaohei.entity.LoginForm;
 import com.xiaohei.entity.param.BusinessModeDto;
 import com.xiaohei.entity.table.LocalBusinessModeEntity;
+import com.xiaohei.entity.table.UserEntity;
+import com.xiaohei.entity.table.UserTokenEntity;
+import com.xiaohei.matcher.AcceptTicket;
 import com.xiaohei.service.admin.LocalBusinessModeService;
 import com.xiaohei.service.admin.UserService;
 import com.xiaohei.service.admin.UserTokenService;
@@ -9,6 +16,9 @@ import com.xiaohei.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +48,7 @@ public class BusinessModeController {
      **/
     @GetMapping("/select/{businessId}")
     @ApiOperation(value = "根据业务ID查询业务详情(这里是接口标签(tab)描述)",notes = "这里是接口详情描述")
+    @RequiresPermissions(value = {"admin:user:view"})
     public R queryBusinessBy (
             @ApiParam("业务ID") @PathVariable String businessId){
         // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
@@ -69,6 +80,46 @@ public class BusinessModeController {
     public R addBusinessBy (@PathVariable String id){
         // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
         return modeService.deleteById(id);
+    }
+
+    @PostMapping("/user/login")
+    @ApiOperation(value = "adminLogin(LoginForm form)",notes = "test-notes")
+    public R login(@RequestBody AcceptTicket form){
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()){
+            UserEntity user = (UserEntity) subject.getPrincipal();
+            UserTokenEntity token = tokenService.selectById(user.getId());
+            return R.ok().put("principal",user).put("credentials",token.getToken());
+        }else {
+            // TODO :
+            //  1、根据用户名查询用户
+            //  2、对用户输入密码进行加密处理以便于数据库存储密码进行比对  暂未进行加密处理
+            //  3、根据用户签发登录token
+            //  4、执行登录操作
+            Wrapper<UserEntity> wap = new EntityWrapper<UserEntity>().eq("USER_NAME", form.getUsername());
+            UserEntity user = userService.selectOne(wap);
+            if (user == null) return R.error(GlobalConstant.USER_NOT_EXIST);
+            UserTokenEntity token = new UserTokenEntity(true);
+            token.setId(user.getId());
+            boolean b = tokenService.insertOrUpdate(token);
+            if (b){
+                form.setToken(token.getToken());
+                subject.login(form);
+                return R.ok().put("principal",user).put("credentials",token.getToken());
+            }else {
+                return R.error(GlobalConstant.TOKEN_ISSUE_FAILD);
+            }
+        }
+    }
+    @GetMapping("/user/logout")
+    @ApiOperation(value = "用户退出",notes = "用户退出")
+    public R logout(){
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()){
+            subject.logout();
+            // TODO : 如果用户凭证、权限列表等用户信息进行了缓存，则在这里还需要清理缓存信息，保证用户登录状态相关的信息一致性。
+        }
+        return R.ok();
     }
 
 }

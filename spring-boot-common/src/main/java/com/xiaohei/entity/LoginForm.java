@@ -24,5 +24,6 @@ public class LoginForm implements Serializable {
 
     private String username ;
     private String password ;
+    private String captcha ;
 
 }

@@ -1,6 +1,7 @@
 package com.xiaohei.matcher;
 
 
+import com.xiaohei.entity.LoginForm;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
@@ -10,7 +11,8 @@ import org.apache.shiro.authc.AuthenticationToken;
  * @date : 2019-11-28 16:43:14
  * @email : m13886933623@163.com
  */
-public class AcceptTicket implements AuthenticationToken {
+
+public class AcceptTicket extends LoginForm implements AuthenticationToken {
     /**
      * token : 允许用户访问某些资源（该资源需要登录才能访问）的令牌。
      */
@@ -29,5 +31,20 @@ public class AcceptTicket implements AuthenticationToken {
     @Override
     public Object getCredentials() {
         return token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String toString() {
+        return "AcceptTicket{" +
+                "token='" + token + '\'' +
+                '}';
     }
 }
