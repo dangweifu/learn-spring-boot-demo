@@ -81,6 +81,8 @@ public class AuthReam  extends AuthorizingRealm {
         UserEntity user = userService.selectOne(new EntityWrapper<UserEntity>().eq("ID", token.getId()));
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());
         System.out.println(salt);
+        // 这个对象的参数详解可以参考 https://blog.csdn.net/weixin_42195162/article/details/89376076
+        // 我这里说明下我的参数 user对象 、user.password 、user.salt 、当前Realm源对象名称
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword() , salt , getName() );
         CredentialsMatcher matcher = getCredentialsMatcher();
         // 进行密码校验

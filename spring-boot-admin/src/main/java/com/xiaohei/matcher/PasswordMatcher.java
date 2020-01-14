@@ -33,15 +33,19 @@ public class PasswordMatcher extends HashedCredentialsMatcher {
 
         if (token instanceof AcceptTicket){
             AcceptTicket from = (AcceptTicket) token;
+            // 从 token 中获取用户登录密码，也就是用户登录时输入的密码
+            // 可以是明文，也可能是对称加密后的密文
             String inPass = from.getPassword();
+            // 强制类型转换，因为 info 是从 realm 中传递过来的
+            // ( realm 中 doGetAuthenticationInfo 方法返回值就是这个info参数)
             SimpleAuthenticationInfo userInfo = (SimpleAuthenticationInfo)info;
-            Object o = userInfo.getCredentials();
+            // 从 info 中获取加密随机盐
             ByteSource credentialsSalt = userInfo.getCredentialsSalt();
-
-
+            // 进行 MD5 加密返回密文 32位字符串
             String inPassAfterEncrypt = new Md5Hash(inPass, credentialsSalt).toString();
+            // 从 info 中获取数据库存储的用户密码
             String dbPassword = userInfo.getCredentials().toString();
-
+            // 打印日志 TODO : 进行用户登录操作日志打印
             System.out.println("inPassAfterEncrypt : " + inPassAfterEncrypt);
             System.out.println("inPass + user.getSalt() : " + inPass + credentialsSalt);
             //进行密码的比对
