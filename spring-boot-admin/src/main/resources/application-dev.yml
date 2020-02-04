@@ -39,7 +39,7 @@ spring:
     host: localhsot
     database: 0
     port: 6379
-    password:
+    password: TJ123456!
     timeout: 6000ms  # 连接超时时长（毫秒）
     jedis:
       pool:
