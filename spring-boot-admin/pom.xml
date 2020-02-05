@@ -11,7 +11,7 @@
     <artifactId>spring-boot-admin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.0</shiro.version>
         <swagger.version>2.7.0</swagger.version>
     </properties>
     <dependencies>
