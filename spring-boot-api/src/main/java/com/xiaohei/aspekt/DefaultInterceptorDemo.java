@@ -24,8 +24,8 @@ import java.util.Arrays;
  * @date : 2020-01-13 17:49:49
  * @email : m13886933623@163.com
  */
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class DefaultInterceptorDemo {
     /** 定义日志操作属性 */
     private static final Logger logger = LoggerFactory.getLogger(DefaultInterceptorDemo.class);
@@ -33,24 +33,24 @@ public class DefaultInterceptorDemo {
     /** 定义切入点表达式
      *  可参考地址 ： https://www.iteye.com/blog/zhuchengzzcc-1504014
      **/
-    private final String POINT_CUT = "execution(public * com.xiaohei.service.admin.*.*(..))";
+    private final String POINT_CUT = "execution(public * com.xiaohei.service.api.*.*(..))";
 
 
-//    @Pointcut(POINT_CUT)
+    @Pointcut(POINT_CUT)
     public void pointCut(){}
 
 
     /**
      * 前置通知 ：在方法调用之前先调用此方法。
      * */
-    // @Before(value = "pointCut()")
+    @Before(value = "pointCut()")
     public void before(JoinPoint joinPoint){
         logger.info("@Before通知执行");
         //获取目标方法参数信息
         Object[] args = joinPoint.getArgs();
         Arrays.stream(args).forEach(arg->{
             try {
-                // Mapped to com.xiaohei.controller.BusinessModeController#addBusinessBy(BusinessModeDto)
+                // Mapped to com.xiaohei.com.xiaohei.controller.BusinessModeController#addBusinessBy(BusinessModeDto)
                 // {"id":"4","businessName":"业务名称四","businessType":"4","businessNo":"1000004"}
                 logger.info(OBJECT_MAPPER.writeValueAsString(arg));
             } catch (JsonProcessingException e) {
@@ -120,16 +120,16 @@ public class DefaultInterceptorDemo {
      *            参数为Object类型将匹配任何目标返回值
      *
      */
-//    @AfterReturning(value = POINT_CUT,returning = "result")
+    @AfterReturning(value = POINT_CUT,returning = "result")
     public void doAfterReturningAdvice1(JoinPoint joinPoint,Object result){
         logger.info("第一个后置返回通知的返回值："+result);
     }
 
-//    @AfterReturning(value = POINT_CUT,returning = "result",argNames = "result")
+    @AfterReturning(value = POINT_CUT,returning = "result",argNames = "result")
     public void doAfterReturningAdvice2(String result) {
         logger.info("第二个后置返回通知的返回值：" + result);
     }
-//    @AfterReturning(value = POINT_CUT,returning = "result")
+    @AfterReturning(value = POINT_CUT,returning = "result")
     public void doAfterReturningAdvice3() {
         logger.info("第二个后置返回通知的返回值：3");
     }
@@ -145,7 +145,7 @@ public class DefaultInterceptorDemo {
      * @param joinPoint
      * @param exception
      */
-//    @AfterThrowing(value = POINT_CUT)
+    @AfterThrowing(value = POINT_CUT)
     public void doAfterThrowingAdvice(JoinPoint joinPoint,Throwable exception){
         logger.info(joinPoint.getSignature().getName());
         if(exception instanceof NullPointerException){
@@ -158,7 +158,7 @@ public class DefaultInterceptorDemo {
      * 后置通知 ：
      * @param joinPoint ：
      */
-//    @After(value = POINT_CUT)
+    @After(value = POINT_CUT)
     public void doAfterAdvice(JoinPoint joinPoint){
         logger.info("后置通知执行了!");
     }
@@ -170,7 +170,7 @@ public class DefaultInterceptorDemo {
      *   环绕通知非常强大，可以决定目标方法是否执行，什么时候执行，执行时是否需要替换方法参数，执行完毕是否需要替换返回值。
      *   环绕通知第一个参数必须是org.aspectj.lang.ProceedingJoinPoint类型
      */
-//    @Around(value = POINT_CUT)
+    @Around(value = POINT_CUT)
     public Object doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
         logger.info("@Around环绕通知："+proceedingJoinPoint.getSignature().toString());
         Object obj = null;
