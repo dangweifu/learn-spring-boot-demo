@@ -2,6 +2,7 @@ package com.xiaohei.service.admin.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xiaohei.dao.admin.LocalBusinessModeDao;
+import com.xiaohei.elasticsearch.BaseElasticService;
 import com.xiaohei.entity.param.BusinessModeDto;
 import com.xiaohei.entity.table.LocalBusinessModeEntity;
 import com.xiaohei.service.admin.LocalBusinessModeService;
@@ -26,9 +27,13 @@ public class LocalBusinessModeServiceImpl extends ServiceImpl<LocalBusinessModeD
     @Resource
     private LocalBusinessModeDao dao ;
 
+    @Resource
+    private BaseElasticService elasticService ;
+
     @Override
     public R queryBusinessModeBy(String id) {
         // TODO : 这里进行入参检查（非空、正则表达式匹配等等方式检查参数是否合格，非法参数直接抛出异常提示用户）
+        elasticService.createIndex("dangweifu","{}");
         return R.ok(dao.selectById(id)) ;
     }
 

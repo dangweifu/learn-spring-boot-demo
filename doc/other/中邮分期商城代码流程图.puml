@@ -1,4 +1,14 @@
 @startuml
 用户 -> 分期商城:JdVopOrderManageServiceImpl.submitOrder(提交订单)
-分期商城 -> 分期商城:
+分期商城 -> 分期商城:对象拷贝：BeanCopier.create().copy(jdVopOrderRequestDTO, jdVopOrderRequestTransportDTO, null);
+分期商城 -> 分期商城:设置商品编号：setSku()
+分期商城 -> 分期商城:service.submitOrder(jdVopOrderRequestTransportDTO)
+分期商城 -> 分期商城:Validator.validate(jdVopOrderRequestTransportDTO);
+分期商城 -> 分期商城:请求参数封装（请求jdVop）
+分期商城 -> 分期商城:开始调用京东VOP接口日志输出
+分期商城 -> 分期商城:获取京东VOP公共属性配置
+分期商城 -> 分期商城:获取令牌（1、从Redis中获取，2、根据属性配置从数据库获取，3、从京VOP接口获取）
+分期商城 -> 分期商城:更新令牌有效期到Redis
+分期商城 -> 京东VOP:根据apiUrl解析basicNameValuePairMap校验并刷新token发送请求
+京东VOP -> 分期商城:
 @enduml
