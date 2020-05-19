@@ -1,0 +1,4 @@
+@startuml
+用户 -> 分期商城:JdVopOrderManageServiceImpl.submitOrder(提交订单)
+分期商城 -> 分期商城:
+@enduml

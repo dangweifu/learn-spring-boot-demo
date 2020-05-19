@@ -47,10 +47,10 @@ public class ApiServiceDemoImpl extends ServiceImpl<ApiDemoDao, UserEntity> impl
         if (condition.getEqContidion() == null){
             return R.ok().put("userList",baseMapper.selectList(new EntityWrapper<UserEntity>()));
         }else {
-            Map<String, Object> eqContidion = condition.getEqContidion();
+            Map<String, Object> eqCondition = condition.getEqContidion();
             EntityWrapper<UserEntity> wap = new EntityWrapper<>();
-            for (String key : eqContidion.keySet()){
-                wap.eq(key.toUpperCase() , eqContidion.get(key));
+            for (String key : eqCondition.keySet()){
+                wap.eq(key.toUpperCase() , eqCondition.get(key));
             }
             return R.ok().put("userList",baseMapper.selectList(wap));
         }
