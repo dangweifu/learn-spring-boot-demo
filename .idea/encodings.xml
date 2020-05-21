@@ -6,18 +6,9 @@
     <file url="file://$PROJECT_DIR$/spring-boot-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-core" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-dao/spring-boot-admin-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-dao/spring-boot-api-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-dao/spring-boot-common-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-entity" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-entity/spring-boot-param-entity" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-entity/spring-boot-result-entity" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-entity/spring-boot-table-entity" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-mongodb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-mongodb" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-service/spring-boot-admin-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-service/spring-boot-api-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spring-boot-service/spring-boot-common-service" charset="UTF-8" />
   </component>
 </project>

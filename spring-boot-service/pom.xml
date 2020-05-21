@@ -12,6 +12,7 @@
 
     <artifactId>spring-boot-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <properties>
         <elasticsearch.version>7.4.0</elasticsearch.version>
         <swagger.version>2.7.0</swagger.version>
@@ -42,5 +43,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+
     </dependencies>
 </project>

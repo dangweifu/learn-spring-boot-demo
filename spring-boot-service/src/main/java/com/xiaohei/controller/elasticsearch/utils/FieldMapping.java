@@ -1,4 +1,4 @@
-package com.xiaohei.elasticsearch.utils;
+package com.xiaohei.controller.elasticsearch.utils;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

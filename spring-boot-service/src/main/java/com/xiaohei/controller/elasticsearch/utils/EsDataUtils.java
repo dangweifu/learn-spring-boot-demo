@@ -1,13 +1,13 @@
-package com.xiaohei.elasticsearch.utils;
+package com.xiaohei.controller.elasticsearch.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import com.xiaohei.elasticsearch.constant.ElasticSearchConstant;
-import com.xiaohei.elasticsearch.dto.PageModelDTO;
-import com.xiaohei.elasticsearch.dto.RangConditionDTO;
-import com.xiaohei.elasticsearch.dto.RangConditionsToTimeModelDTO;
+import com.xiaohei.controller.elasticsearch.constant.ElasticSearchConstant;
+import com.xiaohei.controller.elasticsearch.dto.PageModelDTO;
+import com.xiaohei.controller.elasticsearch.dto.RangConditionDTO;
+import com.xiaohei.controller.elasticsearch.dto.RangConditionsToTimeModelDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.ActionListener;

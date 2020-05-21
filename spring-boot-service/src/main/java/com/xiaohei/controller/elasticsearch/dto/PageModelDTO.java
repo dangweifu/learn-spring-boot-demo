@@ -1,4 +1,4 @@
-package com.xiaohei.elasticsearch.dto;
+package com.xiaohei.controller.elasticsearch.dto;
 
 import lombok.Data;
 import org.elasticsearch.search.SearchHit;

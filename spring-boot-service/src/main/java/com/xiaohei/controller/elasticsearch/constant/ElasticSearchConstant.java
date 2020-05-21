@@ -1,4 +1,4 @@
-package com.xiaohei.elasticsearch.constant;
+package com.xiaohei.controller.elasticsearch.constant;
 
 /**
  * ES常量类

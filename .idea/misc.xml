@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/spring-boot-mongodb" />
+  </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
@@ -23,6 +26,7 @@
         <option value="$PROJECT_DIR$/spring-boot-admin-dao/pom.xml" />
         <option value="$PROJECT_DIR$/spring-boot-api-dao/pom.xml" />
         <option value="$PROJECT_DIR$/spring-boot-common-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-mongodb/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

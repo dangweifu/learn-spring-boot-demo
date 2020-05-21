@@ -10,6 +10,7 @@
         <module name="spring-boot-generator" />
         <module name="spring-boot-core" />
         <module name="spring-boot-service" />
+        <module name="spring-boot-mongodb" />
         <module name="spring-boot-api" />
         <module name="spring-boot-admin" />
         <module name="spring-boot-common" />
@@ -46,6 +47,7 @@
       <module name="spring-boot-dao" options="-parameters" />
       <module name="spring-boot-entity" options="-parameters" />
       <module name="spring-boot-generator" options="-parameters" />
+      <module name="spring-boot-mongodb" options="-parameters" />
       <module name="spring-boot-param-entity" options="-parameters" />
       <module name="spring-boot-result-entity" options="" />
       <module name="spring-boot-service" options="-parameters" />

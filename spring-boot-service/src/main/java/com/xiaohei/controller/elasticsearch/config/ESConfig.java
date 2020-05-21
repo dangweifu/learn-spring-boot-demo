@@ -1,4 +1,4 @@
-package com.xiaohei.elasticsearch.config;
+package com.xiaohei.controller.elasticsearch.config;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +79,6 @@ public class ESConfig {
                 .filter(Objects::nonNull)
                 .toArray(HttpHost[]::new);
         log.info("hosts:{}", Arrays.toString(hosts));
-
         //配置权限验证
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
         return RestClient.builder(hosts).setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
