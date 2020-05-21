@@ -88,17 +88,17 @@ public class BaseElasticService {
      * @param index index
      * @param entity    对象
      */
-    public void insertOrUpdateOne(String index, ElasticEntity entity) {
-        IndexRequest request = new IndexRequest(index);
-        // todo: 日志输出
-        request.id(entity.getId());
-        request.source(entity.getData(), XContentType.JSON);
-//        request.source(JSON.toJSONString(entity.getData()), XContentType.JSON);
-        try {
-            restHighLevelClient.index(request, RequestOptions.DEFAULT);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void insertOrUpdateOne(String index, Object entity) {
+//        IndexRequest request = new IndexRequest(index);
+//        // todo: 日志输出
+//        request.id(entity.getId());
+//        request.source(entity.getData(), XContentType.JSON);
+////        request.source(JSON.toJSONString(entity.getData()), XContentType.JSON);
+//        try {
+//            restHighLevelClient.index(request, RequestOptions.DEFAULT);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 
@@ -108,15 +108,15 @@ public class BaseElasticService {
      * @param index index
      * @param list 带插入列表
      */
-    public void insertBatch(String index, List<ElasticEntity> list) {
-        BulkRequest request = new BulkRequest();
-        list.forEach(id -> request.add(new IndexRequest(index).id(id.getId())
-                .source(id.getData(), XContentType.JSON)));
-        try {
-            restHighLevelClient.bulk(request, RequestOptions.DEFAULT);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void insertBatch(String index, List list) {
+//        BulkRequest request = new BulkRequest();
+//        list.forEach(id -> request.add(new IndexRequest(index).id(id.getId())
+//                .source(id.getData(), XContentType.JSON)));
+//        try {
+//            restHighLevelClient.bulk(request, RequestOptions.DEFAULT);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /** 批量删除
