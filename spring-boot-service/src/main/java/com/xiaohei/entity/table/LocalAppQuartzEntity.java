@@ -1,20 +1,19 @@
-package com.xiaohei.scheduler.dto;
+package com.xiaohei.entity.table;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
 /**
  * @author : WiuLuS
  * @version : v1.0 05.22.2020
  * @discription :
- * @date : 2020-05-22 11:21:54
+ * @date : 2020-05-22 13:48:29
  * @email : m13886933623@163.com
  */
 @Data
-public class AppQuartz {
-    /**
-     * 主键
-     */
-    private Integer id;
+@TableName("LOCAL_APP_QUARTZ")
+public class LocalAppQuartzEntity extends BaseTableEntity {
+
     /**
      * 任务名称
      */
@@ -35,5 +34,4 @@ public class AppQuartz {
      * 需要传递的参数
      */
     private String jobInvokeParam;
-
 }

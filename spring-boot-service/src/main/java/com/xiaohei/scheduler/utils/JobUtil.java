@@ -1,6 +1,6 @@
 package com.xiaohei.scheduler.utils;
 
-import com.xiaohei.scheduler.dto.AppQuartz;
+import com.xiaohei.entity.table.LocalAppQuartzEntity;
 import com.xiaohei.scheduler.job.JobOne;
 import com.xiaohei.scheduler.job.JobTwo;
 import org.quartz.*;
@@ -27,12 +27,12 @@ public class JobUtil {
      * 新建一个任务
      *
      */
-    public String addJob(AppQuartz appQuartz) throws Exception  {
+    public String addJob(LocalAppQuartzEntity appQuartz) throws Exception  {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date=df.parse(appQuartz.getStartTime());
+        Date date=df.parse(appQuartz.getJobStartTime());
 
-        if (!CronExpression.isValidExpression(appQuartz.getCronExpression())) {
+        if (!CronExpression.isValidExpression(appQuartz.getJobCronExpression())) {
             return "Illegal cron expression";   //表达式格式不正确
         }
         JobDetail jobDetail=null;
@@ -45,15 +45,15 @@ public class JobUtil {
         }
 
         //表达式调度构建器(即任务执行的时间,不立即执行)
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(appQuartz.getCronExpression()).withMisfireHandlingInstructionDoNothing();
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(appQuartz.getJobCronExpression()).withMisfireHandlingInstructionDoNothing();
 
         //按新的cronExpression表达式构建一个新的trigger
         CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(appQuartz.getJobName(), appQuartz.getJobGroup()).startAt(date)
                 .withSchedule(scheduleBuilder).build();
 
         //传递参数
-        if(appQuartz.getInvokeParam()!=null && !"".equals(appQuartz.getInvokeParam())) {
-            trigger.getJobDataMap().put("invokeParam",appQuartz.getInvokeParam());
+        if(appQuartz.getJobInvokeParam()!=null && !"".equals(appQuartz.getJobInvokeParam())) {
+            trigger.getJobDataMap().put("invokeParam",appQuartz.getJobInvokeParam());
         }
         scheduler.scheduleJob(jobDetail, trigger);
         // pauseJob(appQuartz.getJobName(),appQuartz.getJobGroup());
@@ -108,7 +108,7 @@ public class JobUtil {
     }
 
     //删除某个任务
-    public String  deleteJob(AppQuartz appQuartz) throws SchedulerException {
+    public String  deleteJob(LocalAppQuartzEntity appQuartz) throws SchedulerException {
         JobKey jobKey = new JobKey(appQuartz.getJobName(), appQuartz.getJobGroup());
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
         if (jobDetail == null ) {
@@ -123,8 +123,8 @@ public class JobUtil {
     }
 
     //修改任务
-    public String  modifyJob(AppQuartz appQuartz) throws SchedulerException {
-        if (!CronExpression.isValidExpression(appQuartz.getCronExpression())) {
+    public String  modifyJob(LocalAppQuartzEntity appQuartz) throws SchedulerException {
+        if (!CronExpression.isValidExpression(appQuartz.getJobCronExpression())) {
             return "Illegal cron expression";
         }
         TriggerKey triggerKey = TriggerKey.triggerKey(appQuartz.getJobName(),appQuartz.getJobGroup());
@@ -132,13 +132,13 @@ public class JobUtil {
         if (scheduler.checkExists(jobKey) && scheduler.checkExists(triggerKey)) {
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             //表达式调度构建器,不立即执行
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(appQuartz.getCronExpression()).withMisfireHandlingInstructionDoNothing();
+            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(appQuartz.getJobCronExpression()).withMisfireHandlingInstructionDoNothing();
             //按新的cronExpression表达式重新构建trigger
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey)
                     .withSchedule(scheduleBuilder).build();
             //修改参数
-            if(!trigger.getJobDataMap().get("invokeParam").equals(appQuartz.getInvokeParam())) {
-                trigger.getJobDataMap().put("invokeParam",appQuartz.getInvokeParam());
+            if(!trigger.getJobDataMap().get("invokeParam").equals(appQuartz.getJobInvokeParam())) {
+                trigger.getJobDataMap().put("invokeParam",appQuartz.getJobInvokeParam());
             }
             //按新的trigger重新设置job执行
             scheduler.rescheduleJob(triggerKey, trigger);

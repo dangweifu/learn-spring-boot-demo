@@ -44,6 +44,14 @@ public class BeanCopierUtil {
         }
         beanCopier.copy(source, target, null);
     }
-
+    /**
+     * BeanCopier的copy
+     * 将 source 实体 copy 至 target 实体
+     * @param source 源文件的
+     * @param target 目标文件
+     */
+    public static void copyNoCache(Object source , Object target){
+        BeanCopier.create(source.getClass(),target.getClass(),false).copy(source,target,null);
+    }
 
 }

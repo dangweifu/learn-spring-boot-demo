@@ -1,7 +1,9 @@
 package com.xiaohei.scheduler;
 
-import com.xiaohei.scheduler.dto.AppQuartz;
+import com.xiaohei.entity.table.LocalAppQuartzEntity;
 import com.xiaohei.scheduler.utils.JobUtil;
+import com.xiaohei.service.admin.LocalAppQuartzService;
+import com.xiaohei.utils.BeanCopierUtil;
 import com.xiaohei.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class JobController {
     @Autowired
     private JobUtil jobUtil;
     @Autowired
-//    private AppQuartzService appQuartzService;
+    private LocalAppQuartzService appQuartzService;
 
     public JobController() {
     }
@@ -33,9 +35,8 @@ public class JobController {
      * 添加一个job
      */
     @RequestMapping(value="/add",method= RequestMethod.POST)
-    public R addJob(@RequestBody AppQuartz appQuartz) throws Exception {
-
-//        appQuartzService.insertAppQuartzSer(appQuartz);
+    public R addJob(@RequestBody LocalAppQuartzEntity appQuartz) throws Exception {
+        appQuartzService.insert(appQuartz);
         String job = jobUtil.addJob(appQuartz);
         return R.ok() ;
     }
@@ -45,11 +46,10 @@ public class JobController {
      */
     @RequestMapping(value="/stop",method=RequestMethod.POST)
     public R stopJob(@RequestBody Integer[]quartzIds) throws Exception {
-        AppQuartz appQuartz=null;
+        LocalAppQuartzEntity appQuartz=null;
         if(quartzIds.length>0){
             for(Integer quartzId:quartzIds) {
-
-//                appQuartz=appQuartzService.selectAppQuartzByIdSer(quartzId).get(0);
+                appQuartz = appQuartzService.selectById(quartzId);
                 jobUtil.pauseJob(appQuartz.getJobName(), appQuartz.getJobGroup());
             }
             return R.ok("success stopJob");
@@ -63,10 +63,10 @@ public class JobController {
      */
     @RequestMapping(value="/recover",method=RequestMethod.POST)
     public R recoverJob(@RequestBody Integer[]quartzIds) throws Exception {
-        AppQuartz appQuartz=null;
+        LocalAppQuartzEntity appQuartz=null;
         if(quartzIds.length>0) {
             for(Integer quartzId:quartzIds) {
-//                appQuartz=appQuartzService.selectAppQuartzByIdSer(quartzId).get(0);
+                appQuartz=appQuartzService.selectById(quartzId);
                 jobUtil.resumeJob(appQuartz.getJobName(), appQuartz.getJobGroup());
             }
             return R.ok("success recoverJob");
@@ -78,13 +78,13 @@ public class JobController {
      * 删除job
      */
     @RequestMapping(value="/deleteJob",method=RequestMethod.POST)
-    public R deletejob(@RequestBody Integer[]quartzIds) throws Exception {
-        AppQuartz appQuartz=null;
+    public R deletejob(@RequestBody Integer[] quartzIds) throws Exception {
+        LocalAppQuartzEntity appQuartz=null;
         for(Integer quartzId:quartzIds) {
-//            appQuartz=appQuartzService.selectAppQuartzByIdSer(quartzId).get(0);
+            appQuartz=appQuartzService.selectById(quartzId);
             String ret=jobUtil.deleteJob(appQuartz);
             if("success".equals(ret)) {
-//                appQuartzService.deleteAppQuartzByIdSer(quartzId);
+                appQuartzService.deleteById(quartzId);
             }
         }
         return R.ok("success deletejob");
@@ -94,10 +94,12 @@ public class JobController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public R  updateJob(@RequestBody AppQuartz appQuartz) throws Exception {
+    public R  updateJob(@RequestBody LocalAppQuartzEntity appQuartz) throws Exception {
         String ret= jobUtil.modifyJob(appQuartz);
         if("success".equals(ret)) {
-//            appQuartzService.updateAppQuartzSer(appQuartz);
+            LocalAppQuartzEntity quartz = new LocalAppQuartzEntity();
+            BeanCopierUtil.copyNoCache(appQuartz,quartz);
+            appQuartzService.updateById(quartz);
             return R.ok("success updateJob");
         }else {
             return R.error(400,"fail updateJob");
