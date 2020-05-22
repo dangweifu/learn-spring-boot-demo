@@ -18,8 +18,10 @@ public class MongoDBConfig  {
         DbRefResolver dbRefResolver = new DefaultDbRefResolver(factory);
         MappingMongoConverter mappingConverter = new MappingMongoConverter(dbRefResolver, context);
         mappingConverter.setCustomConversions(beanFactory.getBean(CustomConversions.class));
-        mappingConverter.setTypeMapper(new DefaultMongoTypeMapper(null));//去掉默认mapper添加的_class
-        mappingConverter.setCustomConversions(conversions);//添加自定义的转换器
+        //去掉默认mapper添加的_class
+        mappingConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
+        //添加自定义的转换器
+        mappingConverter.setCustomConversions(conversions);
         return mappingConverter;
     }
 
@@ -28,10 +30,11 @@ public class MongoDBConfig  {
         DefaultDbRefResolver dbRefResolver = new DefaultDbRefResolver(dbFactory);
         MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, this.mongoMappingContext());
         List<Object> list = new ArrayList<>();
-        list.add(new BigDecimalToDecimal128Converter());//自定义的类型转换器
-        list.add(new Decimal128ToBigDecimalConverter());//自定义的类型转换器
-        list.add(new TimestampConverter());//自定义的类型转换器
-        list.add(new LongTimesConverter());//自定义的类型转换器
+        //添加自定义的类型转换器
+        list.add(new BigDecimalToDecimal128Converter());
+        list.add(new Decimal128ToBigDecimalConverter());
+        list.add(new TimestampConverter());
+        list.add(new LongTimesConverter());
         converter.setCustomConversions(new MongoCustomConversions(list));
         return converter;
     }

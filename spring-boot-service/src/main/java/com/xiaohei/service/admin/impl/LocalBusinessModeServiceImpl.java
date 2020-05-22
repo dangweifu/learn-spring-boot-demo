@@ -2,7 +2,6 @@ package com.xiaohei.service.admin.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xiaohei.dao.admin.LocalBusinessModeDao;
-import com.xiaohei.controller.elasticsearch.BaseElasticService;
 import com.xiaohei.entity.param.BusinessModeDto;
 import com.xiaohei.entity.table.LocalBusinessModeEntity;
 import com.xiaohei.service.admin.LocalBusinessModeService;
