@@ -34,12 +34,10 @@
         <okhttp.version>3.6.0</okhttp.version>
         <mybatisplus.version>2.3.3</mybatisplus.version>
         <mybatisplus.spring.boot.version>1.0.5</mybatisplus.spring.boot.version>
-
+        <swagger.version>2.7.0</swagger.version>
     </properties>
 
     <dependencies>
-        <!-- entity -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -178,6 +176,18 @@
             <artifactId>quartz-jobs</artifactId>
             <version>2.2.3</version>
         </dependency>
+        <!-- api-swagger 接口文档配置 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -54,4 +54,26 @@ public class BeanCopierUtil {
         BeanCopier.create(source.getClass(),target.getClass(),false).copy(source,target,null);
     }
 
+    /**
+     * 对象 copy
+     * @param source
+     * @param target
+     * @param <T>
+     * @return
+     */
+    public static <T> T copy(Object source , Class<T> target){
+        if(source == null){
+            return null;
+        }
+        T targetObject = null;
+        try {
+            targetObject = target.newInstance();
+            copyNoCache(source, targetObject);
+        } catch (Exception e) {
+            // todo : 输出日志
+        }
+
+        return targetObject;
+    }
+
 }

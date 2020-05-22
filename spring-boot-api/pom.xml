@@ -13,7 +13,6 @@
     <packaging>jar</packaging>
     <properties>
         <shiro.version>1.4.0</shiro.version>
-        <swagger.version>2.7.0</swagger.version>
     </properties>
     <dependencies>
         <dependency>
@@ -41,17 +40,6 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
-        </dependency>
-        <!-- api-swagger 接口文档配置 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
 

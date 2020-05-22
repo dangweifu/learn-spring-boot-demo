@@ -7,7 +7,7 @@ spring:
       #      url: jdbc:dm://1.119.134.82:55326/ADMIN
       #      username: ADMIN
       #      password: 123456!@#
-      url: jdbc:mysql://localhost:3306/my_springboot_learn?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      url: jdbc:mysql://localhost:3306/my_springboot_learn?serverTimezone=UTC
       username: root
       password: 12345678
       initial-size: 10
