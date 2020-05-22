@@ -16,6 +16,7 @@
         <oracle.version>11.2.0.3</oracle.version>
         <mssql.version>4.0</mssql.version>
         <pagehelper.spring.boot.version>1.2.5</pagehelper.spring.boot.version>
+        <commons.configuration.version>1.10</commons.configuration.version>
     </properties>
 
     <dependencies>
