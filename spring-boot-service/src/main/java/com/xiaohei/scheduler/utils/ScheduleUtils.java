@@ -85,23 +85,20 @@ public class ScheduleUtils {
      */
     public static void updateScheduleJob(Scheduler scheduler, ScheduleJobEntity scheduleJob) {
         try {
+            // 根据任务ID获取任务触发器KEY
             TriggerKey triggerKey = getTriggerKey(scheduleJob.getId());
-
-            //表达式调度构建器
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression())
-            		.withMisfireHandlingInstructionDoNothing();
-
+            // 根据给定的定时表达式创建新的表达式构建器
+            CronScheduleBuilder cronSchedule = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression());
+            CronScheduleBuilder scheduleBuilder = cronSchedule.withMisfireHandlingInstructionDoNothing();
+            // 根据任务ID获取表达式触发器
             CronTrigger trigger = getCronTrigger(scheduler, scheduleJob.getId());
-            
-            //按新的cronExpression表达式重新构建trigger
+            // 按新的cronExpression表达式重新构建trigger
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-            
-            //参数
+            // 参数
             trigger.getJobDataMap().put(JOB_PARAM_KEY, scheduleJob);
-            
+            // 删除旧触发器，并存储新触发器，该触发器必须与相同的作业相关联。
             scheduler.rescheduleJob(triggerKey, trigger);
-            
-            //暂停任务
+            // 根据参数判断，暂停任务
             if(scheduleJob.getStatus() == Constant.ScheduleStatus.PAUSE.getValue()){
             	pauseJob(scheduler, scheduleJob.getId());
             }
